@@ -22,5 +22,9 @@
   <comments>API: System.disableafterstart</comments>
   <civix>
     <namespace>CRM/Disschedrem</namespace>
+    <format>23.02.1</format>
   </civix>
+  <classloader>
+    <psr4 prefix="Civi\" path="Civi"/>
+  </classloader>
 </extension>
