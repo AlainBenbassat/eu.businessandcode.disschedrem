@@ -46,8 +46,8 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
     $sql = "
       select
         l.action_date_time,
-        c.display_name ,
-        e.email ,
+        c.display_name,
+        e.email,
         l.message
       from
         civicrm_action_log l
@@ -56,9 +56,10 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
       left outer join
         civicrm_email e on e.contact_id  = c.id and e.is_primary  = 1
       where
-        l.is_error =1
+        l.is_error = 1
       order by
         l.action_date_time desc
+      limit 0,100
     ";
 
     $dao = CRM_Core_DAO::executeQuery($sql);
