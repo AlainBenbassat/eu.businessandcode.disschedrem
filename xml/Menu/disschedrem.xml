@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/scheduled-reminders-dashboard</path>
+    <page_callback>CRM_Disschedrem_Page_ScheduledRemindersDashboard</page_callback>
+    <title>ScheduledRemindersDashboard</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
