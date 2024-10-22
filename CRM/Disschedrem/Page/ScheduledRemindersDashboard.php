@@ -7,8 +7,9 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
     CRM_Utils_System::setTitle(E::ts('Scheduled Reminders Dashboard'));
 
     $dao = $this->getStats();
-
     $this->assign('rows', $dao);
+
+    $dao = $this->getErrors();
     $this->assign('errors', $dao);
 
     parent::run();
