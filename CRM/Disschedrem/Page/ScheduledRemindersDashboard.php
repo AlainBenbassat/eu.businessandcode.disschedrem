@@ -8,7 +8,8 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
 
     $dao = $this->getStats();
 
-    $this->assign('records', $dao);
+    $this->assign('rows', $dao);
+    $this->assign('errors', $dao);
 
     parent::run();
   }
@@ -18,7 +19,7 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
       select
         e.id,
         e.start_date event_date,
-        e.title_nl_NL event_name,
+        e.title event_name,
         s.title reminder_title,
         sum(if(al.is_error=0,1,0)) num_successful,
         sum(if(al.is_error=1,1,0)) num_with_error
@@ -36,7 +37,31 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
         e.start_date desc
     ";
 
-    return CRM_Core_DAO::executeQuery($sql);
+    $dao = CRM_Core_DAO::executeQuery($sql);
+    return $dao->fetchAll();
+  }
+
+  function getErrors() {
+    $sql = "
+      select
+        l.action_date_time,
+        c.display_name ,
+        e.email ,
+        l.message
+      from
+        civicrm_action_log l
+      inner join
+        civicrm_contact c on l.contact_id = c.id
+      left outer join
+        civicrm_email e on e.contact_id  = c.id and e.is_primary  = 1
+      where
+        l.is_error =1
+      order by
+        l.action_date_time desc
+    ";
+
+    $dao = CRM_Core_DAO::executeQuery($sql);
+    return $dao->fetchAll();
   }
 
 }
