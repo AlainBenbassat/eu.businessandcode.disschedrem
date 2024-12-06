@@ -31,7 +31,7 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
       left outer join
         civicrm_action_log al on al.action_schedule_id = s.id
       where
-        e.start_date between date_add(now(), INTERVAL -21 DAY) and now()
+        e.start_date between date_add(now(), INTERVAL -21 DAY) and date_add(now(), INTERVAL 11 DAY)
       group BY
         e.id
       order by
