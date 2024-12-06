@@ -33,7 +33,7 @@ class CRM_Disschedrem_Page_ScheduledRemindersDashboard extends CRM_Core_Page {
       where
         e.start_date between date_add(now(), INTERVAL -21 DAY) and date_add(now(), INTERVAL 11 DAY)
       group BY
-        e.id
+        e.id, s.id
       order by
         e.start_date desc
     ";
